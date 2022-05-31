@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        int output = nums[0];
+        int numsLength = nums.size();
+        map<int, int> myMap;
+        
+        for (int i = 0; i < numsLength; i++) {
+            int cnt = 0;
+            for (int j = 0; j < numsLength; j++) {
+                if (nums[j] == nums[i]) {
+                    cnt++;
+                }
+            } // for - j
+            pair<int, int> newPair{nums[i], cnt};
+            if (myMap.find(nums[i]) == myMap.end()) {
+                myMap.insert(newPair);
+            } // if
+        } // for - i
+    
+        for (auto it = myMap.begin(); it != myMap.end(); it++) {
+            if (it->second == 1) {
+                output = it->first;
+            } // if
+        } // for - it
+        return output; 
+    } // singleNumber
+};
